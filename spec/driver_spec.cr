@@ -316,7 +316,7 @@ describe Driver do
 
   it "get timestamp from table" do
     with_test_db do |db|
-      db.exec "create table table1 (m int, dt datetime, ts timestamp)"
+      db.exec "create table table1 (m int, dt datetime, ts timestamp DEFAULT CURRENT_TIMESTAMP)"
       db.exec "insert into table1 (m, dt) values(?, NOW())", 1
 
       dt, ts = db.query_one "SELECT dt, ts from table1", as: {Time, Time}
